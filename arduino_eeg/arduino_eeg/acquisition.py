@@ -32,7 +32,7 @@ class ArduinoAcquisition:
     """
 
     def __init__(
-        self, baud_rate: int = 9600, fs: int = 500, timeout: float = 10
+        self, baud_rate: int = 9600, fs: int = 100, timeout: float = 10
     ) -> None:
         """Class constructor.
 
@@ -46,7 +46,7 @@ class ArduinoAcquisition:
         self.fs = fs  # TODO: raise exception if sampling frequency is above maximum
         self.timeout = timeout
         self.is_setup = False
-        self.port = "/dev/.tty.usbmodem1301"
+        self.port = "/dev/tty.usbmodem1301"
         self.conn_open = False
 
     def _find_port(self):
@@ -54,6 +54,8 @@ class ArduinoAcquisition:
 
         # list ports
         ports = list_ports.comports()
+
+        print(f"{ports=}")
 
         # find port corresponding to Arduino
         for port in ports:
@@ -70,16 +72,16 @@ class ArduinoAcquisition:
         self.is_setup = True
 
         # find Arduino port
-        self._find_port()
+        # self._find_port()
 
         # establish connection with Arduino (pin A0)
         try:
             # TODO: automate finding Arduino port
             self.arduino_conn = serial.Serial(
-                "/dev/tty.usbmodem1201", baudrate=self.baud_rate, timeout=self.timeout
+                "/dev/tty.usbmodem1301", baudrate=self.baud_rate, timeout=self.timeout
             )
             self.conn_open = True
-            # notify user that
+            # notify user that connection with Arduino has been established
             print(f"Established connection with Arduino at port: {self.port}.")
         except:
             raise BaseException("Could not establish connection with Arduino.")
@@ -123,7 +125,7 @@ class ArduinoAcquisition:
             while time.time() - start_time < acq_period:
 
                 # only acquire if data longer than sample rate
-                if time.time() - the_time < 1 / self.fs:
+                if time.time() - the_time > 1 / self.fs:
 
                     # retrieve data from serial port
                     read_data = self.arduino_conn.readline().decode()

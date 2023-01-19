@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "arduino_eeg"
+version = "0.0.1"
+authors = [
+  { name="Patrick McCarthy", email="pat.mccarthy1@aol.com" },
+]
+description = "A package for EEG experiments using an Arduino-based DAQ."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/pmccthy/EEG-from-scratch"
+"Bug Tracker" = ""
