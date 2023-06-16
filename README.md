@@ -1,5 +1,5 @@
 # EEG from Scratch
-![Circuit schematic](http://example.com/images/logo.png](https://github.com/pmccthy/EEG-from-scratch/blob/master/custom_eeg_schematic.png)
+![Circuit schematic](https://github.com/pmccthy/EEG-from-scratch/blob/master/custom_eeg_schematic.png)
 
 - circuit schematic
 - photo of circuit
